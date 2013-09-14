@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expense Manager | New Entry</title>
+	<script src="/assets/js/model.js"></script>
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+</head>
+<body>
+<form id="expense-entry-form">
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <ul class="nav">
+	      <li class="active"><a href="/">Add</a></li>
+	      <li><a href="/overview.html">Overview</a></li>
+	      <li><a href="/export.html">Backup</a></li>
+	    </ul>
+	  </div>
+	</div>
+	<label for="input-value">Expense:</label>
+	<input type="number" placeholder="i.e. 100" id="input-value">
+	<br/>
+	<label for="currency">Currency</label>
+	<select id="currency">
+		<option>BGN</option>
+		<option>EUR</option>
+		<option>USD</option>
+	</select>
+	<br/>
+	<label for="category-value">Category:</label>
+	<input type="text" id="category-value" list="categories">
+	<datalist id="categories">
+	  <option value="Pets">
+	  <option value="Grocery">
+	  <option value="Entertrainment">
+	  <option value="Rent and home expenses">
+	  <option value="Car">
+	  <option value="Transport">
+	</datalist>
+	<br/>
+	<br/>
+	<input type="button" value="Add expense" id="save-button" class="btn btn-large btn-info btn-block">
+</form>
+</body>
+</html>

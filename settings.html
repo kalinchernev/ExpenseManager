@@ -1,0 +1,34 @@
+<!-- todo -->
+<!-- Add flat categories management -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expenses Manager Settings</title>
+	<script src="/assets/js/model.js"></script>
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+</head>
+<body>
+<nav>
+	<ul>
+		<a class="menu-item" href="/"><li>Add expense</li></a>
+		<a class="menu-item" href="/overview.html"><li>Overview</li></a>
+		<a class="menu-item" href="/settings.html"><li>Settings</li></a>
+		<a class="menu-item" href="/export.html"><li>Backup data</li></a>
+	</ul>
+</nav>
+<p>Change your settings:</p>
+<form method="post">
+	<input type="text" placeholder="Your name" id="username">
+	<br/>
+	<label for="currency">Currency input</label>
+	<select id="currency">
+		<option>BGN</option>
+		<option>Dollars</option>
+		<option>Euro</option>
+	</select>
+	<br/>
+	<input type="submit" value="Save settings">
+</form>
+</body>
+</html>

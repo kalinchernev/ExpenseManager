@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expense Manager | Overview</title>
+	<script src="/assets/js/model.js"></script>
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+</head>
+<body>
+<div class="expenses-summary">
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <ul class="nav">
+	      <li><a href="/">Add</a></li>
+	      <li class="active"><a href="/overview.html">Overview</a></li>
+	      <li><a href="/export.html">Backup</a></li>
+	    </ul>
+	  </div>
+	</div>
+	<!-- <input type="button" value="Update data" id="get-expenses" class="btn btn-large btn-info btn-block"> -->
+	<!-- button is only if manual update is required -->
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Expense</th>
+				<th>Currency</th>
+				<th>Category</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<br/>	
+</div>
+<div id="status"></div>
+</body>
+</html>
+<!-- Todos -->
+<!-- Sum up the montly expenses month by month -->
+<!-- History of some sort to not display old months by default -->

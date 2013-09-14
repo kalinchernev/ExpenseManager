@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expense Manager | Backup Data</title>
+	<script src="/assets/js/model.js"></script>
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+</head>
+<body>
+<form id="expense-entry-form" class="form-horizontal">
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <ul class="nav">
+	      <li><a href="/">Add</a></li>
+	      <li><a href="/overview.html">Overview</a></li>
+	      <li class="active"><a href="/export.html">Backup</a></li>
+	    </ul>
+	  </div>
+	</div>
+	<label class="control-label" for="email">Email:</label>
+	<div class="controls">
+		<input type="email" placeholder="i.e. john@gmail.com" id="email">
+	</div>
+	<br/>
+	<div id="ajax-response"></div>
+	<br/>
+	<input type="button" value="Send backup" id="send-backup" class="btn btn-large btn-info btn-block">
+</form>
+</body>
+</html>
+<!-- 
+
+// take out data and store into a json object
+// ajax call to external php file taking the json
+// php file parses the json an makes a table with data
+// php file sends information in a table as an email attachment 
+
+-->
