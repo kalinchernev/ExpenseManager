@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function(){
         var openRequest = indexedDB.open(database,1);
 
         openRequest.onupgradeneeded = function(e) {
-            // console.log("running onupgradeneeded");
             var thisDB = e.target.result;
          
             if(!thisDB.objectStoreNames.contains("Expenses")) {
@@ -35,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function(){
             }
 
             if( URL.indexOf('overview') >= 0){
-                document.addEventListener("DOMContentLoaded", getExpenses());
+                document.addEventListener("DOMContentLoaded", displayExpensesOverview());
             }
 
             if( URL.indexOf('export') >= 0){
-                document.querySelector("#send-backup").addEventListener("click", backupExpenses, false);
+                document.querySelector("#save-backup").addEventListener("click", backupExpenses, false);
             }
             
         }
@@ -83,7 +82,7 @@ function addExpense(e){
 }
 
 // helper to generate a table with the expenses
-function getExpenses(e,storage) {
+function displayExpensesOverview(e) {
 
     var expansesTable = "";
 
@@ -114,82 +113,26 @@ function getAllExpenses(storage){
         
         if(cursor) {
                 // console.log(cursor.value.primaryKey);
-                var expensesJSON = {
-                    "cursor.value.primaryKey" : {
-                        value:cursor.value.value,
-                        currency:cursor.value.currency,
-                        category:cursor.value.category,
-                        created:cursor.value.created
-                    },
-                };
+                // var expensesJSON = {
+                //     "cursor.value.primaryKey" : {
+                //         value:cursor.value.value,
+                //         currency:cursor.value.currency,
+                //         category:cursor.value.category,
+                //         created:cursor.value.created
+                //     },
+                // };
                 for(var field in cursor.value) {
-                    expensesJSON.expenseKey[cursor.value.field] = cursor.value.field;
+                    // expensesJSON.expenseKey[cursor.value.field] = cursor.value.field;
             }
             cursor.continue();
         }
-    // place to contatenate result json to old json
     }
-    // place to return the overall object with data?
 }
 
 function backupExpenses(e) {
-    var email = document.querySelector("#email").value;
-    // var targetURL = "http://expenses.loc/backup.php?email=" + email;
 
-    if (email.indexOf('@') <= 1) {
-        alert("Please enter a valid e-mail address");
-    } else {
-        var allExpenses = {
-            "expsense1": {
-                value: 4.50,
-                category: "Grocery",
-                created: "12/09/2013",
-                currency: "BGN",
-            },
-            "expsense2": {
-                value: 5.50,
-                category: "Pets",
-                created: "13/09/2013",
-                currency: "BGN",
-            },
-        }
-
-            allExpenses = JSON.stringify(allExpenses);
-
-        }
-
-    console.log(allExpenses);
-    return allExpenses;
 }
 
 function deleteExpense(storage,index){
 
-}
-
-function exportToCSV(data, keys) {
-
-    var convertToCSV = function(data, keys) {
-        var orderedData = [];
-        for (var i = 0, iLen = data.length; i < iLen; i++) {
-            temp = data[i];
-            for (var j = 0, jLen = temp.length; j < jLen; j++) {
-
-                if (!orderedData[j]) {
-                    orderedData.push([temp[j]]);
-                } else {
-                    orderedData[j].push(temp[j]);
-                }
-            }
-        }
-        return keys.join(',') + '\r\n' + orderedData.join('\r\n');
-    }
-
-    var str = convertToCSV(data, keys);
-    if (navigator.appName != 'Microsoft Internet Explorer') {
-        window.open('data:text/csv;charset=utf-8,' + escape(str));
-    }
-    else {
-        var popup = window.open('', 'csv', '');
-        popup.document.body.innerHTML = '<pre>' + str + '</pre>';
-    }
 }
