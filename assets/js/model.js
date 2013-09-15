@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function(){
  
 },false);
 
+
 function addExpense(e){
     var category = document.querySelector("#category-value").value;
     var currency = document.querySelector("#currency").value;
@@ -110,19 +111,8 @@ function getAllExpenses(storage){
     this.storage = storage;
     db.transaction([storage], "readonly").objectStore(storage).openCursor().onsuccess = function(e) {
         var cursor = e.target.result;
-        
         if(cursor) {
-                // console.log(cursor.value.primaryKey);
-                // var expensesJSON = {
-                //     "cursor.value.primaryKey" : {
-                //         value:cursor.value.value,
-                //         currency:cursor.value.currency,
-                //         category:cursor.value.category,
-                //         created:cursor.value.created
-                //     },
-                // };
                 for(var field in cursor.value) {
-                    // expensesJSON.expenseKey[cursor.value.field] = cursor.value.field;
             }
             cursor.continue();
         }
@@ -130,7 +120,15 @@ function getAllExpenses(storage){
 }
 
 function backupExpenses(e) {
-
+    db.transaction(["Expenses"], "readonly").objectStore("Expenses").openCursor().onsuccess = function(e) {
+        db = e.target.result;
+        if(cursor) {
+            for(var field in cursor.value) {
+                
+            }
+            cursor.continue();
+        }
+    }
 }
 
 function deleteExpense(storage,index){
