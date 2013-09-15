@@ -1,6 +1,5 @@
 var idbSupported = false;
 var database = "Personal Expenses";
-var db;
 var URL = window.location.href;
  
 document.addEventListener("DOMContentLoaded", function(){
@@ -121,12 +120,12 @@ function getAllExpenses(storage){
 
 function backupExpenses(e) {
     db.transaction(["Expenses"], "readonly").objectStore("Expenses").openCursor().onsuccess = function(e) {
-        db = e.target.result;
-        if(cursor) {
-            for(var field in cursor.value) {
+        var db = e.target.result;
+        if(db) {
+            for(var field in db.value) {
                 
             }
-            cursor.continue();
+            db.continue();
         }
     }
 }
