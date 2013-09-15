@@ -1,12 +1,10 @@
 <?php 
-	$to = $_GET('email');
-	echo $to;
-	// $to = "kalata@shtrak.eu";
-	$subject = "Expenses backup";
-	$message = "Hello there, your expenses are in the attachment";
 
-	mail ($to, $subject, $message);
+$to = $_GET["email"];
+$subject = "Expenses Backup";
+// $expenses = json_decode($_GET["expenses"])
+$message = "Your backup is in the attachment";
 
-	return "Backup successful";
+mail ( $to , $subject , $message );
 
 ?>

@@ -111,52 +111,85 @@ function getAllExpenses(storage){
     this.storage = storage;
     db.transaction([storage], "readonly").objectStore(storage).openCursor().onsuccess = function(e) {
         var cursor = e.target.result;
-        var expensesJSON = {
-            5:{
-                value:4,
-                currency:"BGN",
-                category:"pets",
-                created:"12-12-2012"
-            },
-            6:{
-                value:5,
-                currency:"BGN",
-                category:"Car",
-                created:"12-12-2012"
-            },
-        };
+        
         if(cursor) {
+                // console.log(cursor.value.primaryKey);
+                var expensesJSON = {
+                    "cursor.value.primaryKey" : {
+                        value:cursor.value.value,
+                        currency:cursor.value.currency,
+                        category:cursor.value.category,
+                        created:cursor.value.created
+                    },
+                };
                 for(var field in cursor.value) {
-                // make a expensesJSON object, key:value from one to another
+                    expensesJSON.expenseKey[cursor.value.field] = cursor.value.field;
             }
             cursor.continue();
-        } else {
-            // console.log(expensesJSON);
         }
-    return expensesJSON;
+    // place to contatenate result json to old json
     }
+    // place to return the overall object with data?
 }
 
 function backupExpenses(e) {
     var email = document.querySelector("#email").value;
+    // var targetURL = "http://expenses.loc/backup.php?email=" + email;
 
     if (email.indexOf('@') <= 1) {
         alert("Please enter a valid e-mail address");
     } else {
-        var allExpenses = getAllExpenses("Expenses");
-        console.log(allExpenses);
-        
-        // var ajax = new XMLHttpRequest();
+        var allExpenses = {
+            "expsense1": {
+                value: 4.50,
+                category: "Grocery",
+                created: "12/09/2013",
+                currency: "BGN",
+            },
+            "expsense2": {
+                value: 5.50,
+                category: "Pets",
+                created: "13/09/2013",
+                currency: "BGN",
+            },
+        }
 
-        // ajax.open("GET","backup.php",true);
-        
-        // ajax.send();
+            allExpenses = JSON.stringify(allExpenses);
 
-        // ajax.onreadystatechange = function() {
-        //     if (ajax.readyState==4 && ajax.status==200) {
-        //         document.getElementById("ajax-response").innerHTML=ajax.responseText;
-        //     }
-        // }
-    }
+        }
+
+    console.log(allExpenses);
+    return allExpenses;
 }
 
+function deleteExpense(storage,index){
+
+}
+
+function exportToCSV(data, keys) {
+
+    var convertToCSV = function(data, keys) {
+        var orderedData = [];
+        for (var i = 0, iLen = data.length; i < iLen; i++) {
+            temp = data[i];
+            for (var j = 0, jLen = temp.length; j < jLen; j++) {
+
+                if (!orderedData[j]) {
+                    orderedData.push([temp[j]]);
+                } else {
+                    orderedData[j].push(temp[j]);
+                }
+            }
+        }
+        return keys.join(',') + '\r\n' + orderedData.join('\r\n');
+    }
+
+    var str = convertToCSV(data, keys);
+    if (navigator.appName != 'Microsoft Internet Explorer') {
+        window.open('data:text/csv;charset=utf-8,' + escape(str));
+    }
+    else {
+        var popup = window.open('', 'csv', '');
+        popup.document.body.innerHTML = '<pre>' + str + '</pre>';
+    }
+}
