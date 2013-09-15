@@ -119,15 +119,31 @@ function getAllExpenses(storage){
 }
 
 function backupExpenses(e) {
+    var expensesDump = new Array();
     db.transaction(["Expenses"], "readonly").objectStore("Expenses").openCursor().onsuccess = function(e) {
         var db = e.target.result;
+
         if(db) {
-            for(var field in db.value) {
-                
+            var expenseID = db.primaryKey;
+                expenseValue = db.value.value;
+                expenseCurrency = db.value.currency;
+                expenseCategory = db.value.category;
+                expenseDate = db.value.created;
+
+            var expensesJSON = {
+                expenseID:expenseID,
+                expenseValue:expenseValue,
+                expenseCurrency:expenseCurrency,
+                expenseCategory:expenseCategory,
+                expenseDate:expenseDate,
             }
             db.continue();
         }
-    }
+        var expenseItem = JSON.stringify(expensesJSON);
+        if (expenseItem != undefined) {
+            expensesDump.push(expenseItem);
+        }
+    } 
 }
 
 function deleteExpense(storage,index){
