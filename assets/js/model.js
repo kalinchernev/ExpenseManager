@@ -138,12 +138,14 @@ function backupExpenses(e) {
                 expenseDate:expenseDate,
             }
             db.continue();
+        } else {
+            console.log(expensesDump);
         }
         var expenseItem = JSON.stringify(expensesJSON);
-        if (expenseItem != undefined) {
+        if ((expenseItem != undefined) && (db.direction === "next") ) {
             expensesDump.push(expenseItem);
         }
-    } 
+    }
 }
 
 function deleteExpense(storage,index){
