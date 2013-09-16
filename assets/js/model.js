@@ -81,7 +81,7 @@ function addExpense(e){
     }
 }
 
-// helper to generate a table with the expenses
+// Helper to generate a table with the expenses
 function displayExpensesOverview(e) {
 
     var expansesTable = "";
@@ -139,7 +139,7 @@ function backupExpenses(e) {
             }
             db.continue();
         } else {
-            console.log(expensesDump);
+            JSON2CSV(expensesDump);
         }
         var expenseItem = JSON.stringify(expensesJSON);
         if ((expenseItem != undefined) && (db.direction === "next") ) {
@@ -148,6 +148,37 @@ function backupExpenses(e) {
     }
 }
 
-function deleteExpense(storage,index){
+/* Helper to convert JSON object to CSV file and dump it from the browser
+* @param object JSON object to be converted to CSV file
+* @return browser dump of a CSV file containing the JSON object data re-ordered in a proper way
+*/
+function JSON2CSV(expensesDump){
+    var expenseID = new Array();
+        expenseValue = new Array();
+        expenseCurrency = new Array();
+        expenseCategory = new Array();
+        expenseDate = new Array();
+    var CSV = [expenseID,expenseValue,expenseCurrency,expenseCategory,expenseDate];
+    for (var i = 0; i < expensesDump.length; i++) {
+        var expenseJSON = JSON.parse(expensesDump[i]);
+        // console.log(expensesDump[i]);
+        expenseID.push(expenseJSON.expenseID);
+        expenseValue.push(expenseJSON.expenseValue);
+        expenseCurrency.push(expenseJSON.expenseCurrency);
+        expenseCategory.push(expenseJSON.expenseCategory);
+        expenseDate.push(expenseJSON.expenseDate);
+    }
+    console.log(CSV);
+    // window.open("data:text/csv;charset=utf-8," + escape(CSV));
+}
 
+// counts number of keys in an object
+function countObjectElements(obj) {
+   var count=0;
+   for(var prop in obj) {
+      if (obj.hasOwnProperty(prop)) {
+         ++count;
+      }
+   }
+   return count;
 }
