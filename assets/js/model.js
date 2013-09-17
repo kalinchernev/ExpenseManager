@@ -92,8 +92,8 @@ function displayExpensesOverview(e) {
         if(cursor) {
             expansesTable += "<tr>";
             expansesTable += "<td>"+cursor.key+"</td>";
-            for(var field in cursor.value) {
-                expansesTable += "<td>" + cursor.value[field] + "<td/>";
+            for(var key in cursor.value) {
+                expansesTable += "<td>" + cursor.value[key] + "</td>";
             }
             expansesTable += "</tr>";
             cursor.continue();
