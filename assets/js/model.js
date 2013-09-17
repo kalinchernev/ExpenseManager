@@ -150,6 +150,17 @@ function JSON2CSV(expensesDump){
         item = item + "\n";
         CSV.push(item);
     }
+    CSV = array2string(CSV);
+    // console.log(CSV);
     file = header + CSV;
     window.open("data:text/csv;charset=utf-8," + escape(file));
+}
+
+function array2string(array){
+    var array = array;
+    var string = "";
+    for (var i = 0; i < array.length; i++) {
+        string += array[i];
+    };
+    return string;
 }
