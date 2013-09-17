@@ -17,30 +17,34 @@
 	    </ul>
 	  </div>
 	</div>
-	<label for="input-value">Expense:</label>
-	<input type="number" placeholder="i.e. 100" id="input-value">
-	<br/>
-	<label for="currency">Currency</label>
-	<select id="currency">
-		<option>BGN</option>
-		<option>EUR</option>
-		<option>USD</option>
-	</select>
-	<br/>
-	<label for="category-value">Category:</label>
-	<input type="text" id="category-value" list="categories">
-	<datalist id="categories">
-	  <option value="Pets">
-	  <option value="Grocery">
-	  <option value="Entertrainment">
-	  <option value="Rent and home expenses">
-	  <option value="Car">
-	  <option value="Transport">
-	</datalist>
-	<label for="entry-date">Date:</label>
-	<input type="date" id="entry-date">
-	<br/>
-	<br/>
+	<div class="row-fluid">
+		<div class="span6">
+			<label for="input-value">Expense:</label>
+			<input type="number" placeholder="i.e. 100" id="input-value">
+			<label for="currency">Currency</label>
+			<select id="currency">
+				<option>BGN</option>
+				<option>EUR</option>
+				<option>USD</option>
+			</select>
+		</div>
+		<div class="span6">
+			<label for="category-value">Category:</label>
+			<input type="text" id="category-value" list="categories">
+			<datalist id="categories">
+			  <option value="Pets">
+			  <option value="Grocery">
+			  <option value="Entertrainment">
+			  <option value="Rent and home expenses">
+			  <option value="Car">
+			  <option value="Transport">
+			</datalist>
+			<label for="entry-date">Date:</label>
+			<input type="date" id="entry-date">
+		</div>
+	</div>
+	</br>
+	</br>
 	<input type="button" value="Add expense" id="save-button" class="btn btn-large btn-info btn-block">
 </form>
 </body>
