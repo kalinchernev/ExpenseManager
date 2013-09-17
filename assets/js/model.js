@@ -56,6 +56,7 @@ function addExpense(e){
     var category = document.querySelector("#category-value").value;
     var currency = document.querySelector("#currency").value;
     var value = document.querySelector("#input-value").value;
+    var date = document.querySelector("#entry-date").value;
 
     var transaction = db.transaction(["Expenses"],"readwrite");
     var store = transaction.objectStore("Expenses");
@@ -65,7 +66,7 @@ function addExpense(e){
         value:value,
         currency:currency,
         category:category,
-        created:new Date()
+        created:date
     }
 
     //Perform the add operation to the store
