@@ -159,27 +159,14 @@ function JSON2CSV(expensesDump){
         expenseCurrency = new Array();
         expenseCategory = new Array();
         expenseDate = new Array();
-    var CSV = [expenseID,expenseValue,expenseCurrency,expenseCategory,expenseDate];
+    var CSV = new Array();
+    var header = "expenseID,expenseValue,expenseCurrency,expenseCategory,expenseDate" + "\n";
     for (var i = 0; i < expensesDump.length; i++) {
         var expenseJSON = JSON.parse(expensesDump[i]);
-        // console.log(expensesDump[i]);
-        expenseID.push(expenseJSON.expenseID);
-        expenseValue.push(expenseJSON.expenseValue);
-        expenseCurrency.push(expenseJSON.expenseCurrency);
-        expenseCategory.push(expenseJSON.expenseCategory);
-        expenseDate.push(expenseJSON.expenseDate);
+        var item = expenseJSON.expenseID + "," + expenseJSON.expenseValue + "," + expenseJSON.expenseCurrency + "," + expenseJSON.expenseCategory + "," + expenseJSON.expenseDate;
+        item = item + "\n";
+        CSV.push(item);
     }
-    console.log(CSV);
-    // window.open("data:text/csv;charset=utf-8," + escape(CSV));
-}
-
-// counts number of keys in an object
-function countObjectElements(obj) {
-   var count=0;
-   for(var prop in obj) {
-      if (obj.hasOwnProperty(prop)) {
-         ++count;
-      }
-   }
-   return count;
+    file = header + CSV;
+    window.open("data:text/csv;charset=utf-8," + escape(file));
 }
