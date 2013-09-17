@@ -102,23 +102,6 @@ function displayExpensesOverview(e) {
     }
 }
 
-
-/* 
-* Helper to return a json object with all expenses
-* @return object json object with all expenses
-*/
-function getAllExpenses(storage){
-    this.storage = storage;
-    db.transaction([storage], "readonly").objectStore(storage).openCursor().onsuccess = function(e) {
-        var cursor = e.target.result;
-        if(cursor) {
-                for(var field in cursor.value) {
-            }
-            cursor.continue();
-        }
-    }
-}
-
 function backupExpenses(e) {
     var expensesDump = new Array();
     db.transaction(["Expenses"], "readonly").objectStore("Expenses").openCursor().onsuccess = function(e) {
